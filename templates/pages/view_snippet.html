@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+<main role="main" class="mt-3 flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{ pagename }}</h1>
+                <hr>
+            </div>
+        </div>
 
-</body>
-</html>
+        <fieldset disabled>
+            <div class="row disabled">
+                <div class="col col-8">
+                    Название: <input type="text" value="Hello world" class="form-control">
+                </div>
+                <div class="col col-4">
+                    Дата создания:<input type="text" value="23.11.2020" class="form-control">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="p-2 h-100" style="border:1px solid #ced4da; border-radius:5px;">
+                        <p>
+                            print("hello world")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+    </div>
+</main>
+{% endblock %}
