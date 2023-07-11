@@ -22,6 +22,21 @@
                             Посмотреть сниппеты
                         </a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="form-inline">
+                    <a class="btn btn-outline-info">
+                        Hello {{ request.user.first_name|default:request.user.username }},
+                        </a>
+                        <a href="{% url "logout" %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="form-inline">
+                        <a class="btn btn-outline-secondary" href="{% url "login" %}">Войти</a>
+                    </li>
+                    <li class="form-inline">
+                        <a class="btn btn-outline-info" href="{% url "register" %}">Регистрация</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

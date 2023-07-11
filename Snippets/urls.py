@@ -3,6 +3,8 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from MainApp import views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,4 +15,7 @@ urlpatterns = [
     path('snippets/list/<int:pk>', views.SnippetsDetailView.as_view(), name='snippet_detail'),
     path('snippets/list/<int:pk>/update', views.SnippetsUpdateView.as_view(), name='snippet_update'),
     path('snippets/list/<int:pk>/delete', views.SnippetsDeleteView.as_view(), name='snippet_delete'),
+    path('login/', views.user_login, name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
