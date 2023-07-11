@@ -28,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            <p> Опубликовано {{ snippet.is_published }} </p>
         </fieldset>
 
         <a href="{% url 'snippet_delete' snippet.id %}" class="btn btn-danger">Удалить</a>

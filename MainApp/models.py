@@ -6,6 +6,7 @@ class Snippet(models.Model):
     lang = models.CharField(max_length=30)
     code = models.TextField(max_length=5000)
     creation_date = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

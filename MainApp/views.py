@@ -37,9 +37,14 @@ def add_snippet_page(request):
 
 
 def snippets_page(request):
-    snip = Snippet.objects.all()
+    snip = Snippet.objects.order_by('-id').filter(is_published=True)
     pagename = 'Просмотр сниппетов'
     return render(request, 'pages/view_snippets.html',  {'pagename': pagename, 'snip': snip})
+
+def snippets_page_hidden(request):
+    snip = Snippet.objects.order_by('-id')
+    pagename = 'Просмотр сниппетов'
+    return render(request, 'pages/view_snippets_hidden.html',  {'pagename': pagename, 'snip': snip})
 
 
 class SnippetsDetailView(DetailView):
