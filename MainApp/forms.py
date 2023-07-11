@@ -12,7 +12,7 @@ class SnippetForm(ModelForm):
        widgets = {
            'name': TextInput(attrs={"class": "form-control form-control-lg", 'placeholder': 'Название сниппета'}),
            'lang': TextInput(attrs={"class": "btn btn-secondary dropdown-toggle", 'placeholder': 'Название языка'}),
-           'code': Textarea(attrs={"class": "form-group row", 'placeholder': 'Код сниппета'})
+           'code': Textarea(attrs={"class": "col", 'placeholder': 'Код сниппета'})
        }
        labels = {
            'name': ''

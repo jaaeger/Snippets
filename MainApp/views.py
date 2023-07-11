@@ -1,6 +1,8 @@
 from django.http import Http404
 from django.shortcuts import render, redirect
 from MainApp.forms import SnippetForm
+from .models import Snippet
+from django.views.generic import DetailView, UpdateView, DeleteView
 
 
 def create_snippet(request):
@@ -35,9 +37,22 @@ def add_snippet_page(request):
 
 
 def snippets_page(request):
-    context = {'pagename': 'Просмотр сниппетов'}
-    return render(request, 'pages/view_snippets.html', context)
+    snip = Snippet.objects.all()
+    pagename = 'Просмотр сниппетов'
+    return render(request, 'pages/view_snippets.html',  {'pagename': pagename, 'snip': snip})
 
-def snippet(request):
-    context = {'pagename': 'Просмотр сниппета'}
-    return render(request, 'pages/view_snippet.html', context)
+
+class SnippetsDetailView(DetailView):
+    model = Snippet
+    template_name = 'pages/view_snip.html'
+    context_object_name = 'snippet'
+
+class SnippetsUpdateView(UpdateView):
+    model = Snippet
+    template_name = 'pages/add_snippet.html'
+    form_class = SnippetForm
+
+class SnippetsDeleteView(DeleteView):
+    model = Snippet
+    success_url = '/snippets/list/'
+    template_name = 'pages/delete_snippet.html'

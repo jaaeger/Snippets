@@ -12,16 +12,9 @@
 
         <div class="row">
             <div class="col">
-                <p>На данной страницы будут отображаться все созданные сниппеты.</p>
-                <p>Пока тут просто пример, но скоро заменим реальными сниппетами из БД!</p>
-                <hr>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
                 <table class="table table-striped">
                     <thead class="thead-dark">
+                    {% if snip %}
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Название</th>
@@ -29,18 +22,18 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr>
-                        <td scope="row">1</td>
-                        <td><a href="{% url 'snippet' %}">Пример сниппета</a></td>
-                        <td>23.05.2019 11:32</td>
-                    </tr>
-
-                    <tr>
-                        <td scope="row">2</td>
-                        <td><a href="{% url 'snippet' %}">И ещё один пример</a></td>
-                        <td>23.05.2019 11:34</td>
-                    </tr>
+                        {% for i in snip %}
+                        <tr>
+                            <td scope="row">{{ i.id }}</td>
+                            <td><a href="{% url 'snippet_detail' i.id %}">{{ i.name }}</a></td>
+                            <td>{{ i.creation_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td scope="row">Нет записей</td>
+                        </tr>
+                    {% endif %}
 
                     </tbody>
                 </table>
