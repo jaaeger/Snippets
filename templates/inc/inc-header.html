@@ -24,21 +24,28 @@
                     </li>
                     {% if request.user.is_authenticated %}
                     <li class="form-inline">
-                    <a class="btn btn-outline-info">
-                        Hello {{ request.user.first_name|default:request.user.username }},
+                        <a class="btn btn-outline-secondary" href="{% url 'my_snippets_page' %}">
+                            Мои сниппеты
                         </a>
-                        <a href="{% url "logout" %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="form-inline">
-                        <a class="btn btn-outline-secondary" href="{% url "login" %}">Войти</a>
-                    </li>
-                    <li class="form-inline">
-                        <a class="btn btn-outline-info" href="{% url "register" %}">Регистрация</a>
-                    </li>
                     {% endif %}
+
                 </ul>
             </div>
         </div>
+        {% if request.user.is_authenticated %}
+        <li class="form-inline">
+            <a class="btn btn-outline-secondary">
+                Привет {{ request.user.first_name|default:request.user.username }}
+            </a>
+            <a class="btn btn-outline-info" href="{% url "logout" %}">Выйти</a>
+        </li>
+        {% else %}
+        <li class="form-inline">
+            <a class="btn btn-outline-secondary" href="{% url "login" %}">Войти</a>
+        </li>
+        <li class="form-inline">
+            <a class="btn btn-outline-info" href="{% url "register" %}">Регистрация</a>
+        </li>
+        {% endif %}
     </nav>
 </header>

@@ -39,7 +39,7 @@
                 </table>
                 <a href="{% url 'snippets_page' %}" class="btn btn-danger">Показать без скрытых</a>
                 <div align="right">
-                    <i style="color: gray;">Всего сниппетов: 2</i>
+                    <i style="color: gray;">Всего сниппетов: {{ snip.count }}</i>
                 </div>
             </div>
         </div>
