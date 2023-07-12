@@ -72,14 +72,16 @@ def add_snippet_page(request):
         form = SnippetForm()
         context = {
             'pagename': 'Добавление нового сниппета',
-            'form': form
+            'form': form,
         }
         return render(request, 'pages/add_snippet.html', context)
 
     if request.method == "POST":
         form = SnippetForm(request.POST)
         if form.is_valid():
-            form.save()
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.save()
             return redirect("index_page")
         return render(request, 'pages/add_snippet.html', {'form': form})
 
@@ -95,9 +97,16 @@ def snippets_page_hidden(request):
     return render(request, 'pages/view_snippets_hidden.html',  {'pagename': pagename, 'snip': snip})
 
 def my_snippets_page(request):
-    snip = Snippet.objects.order_by('-id').filter(is_published=True)
+    snip = Snippet.objects.order_by('-id').filter(is_published=True).filter(author=request.user)
     pagename = 'Просмотр сниппетов'
     return render(request, 'pages/view_my_snippets.html',  {'pagename': pagename, 'snip': snip})
+
+def my_snippets_page_hidden(request):
+    snip = Snippet.objects.order_by('-id').filter(author=request.user)
+    pagename = 'Просмотр сниппетов'
+    return render(request, 'pages/view_my_snippets_hidden.html',  {'pagename': pagename, 'snip': snip})
+
+
 
 class SnippetsDetailView(DetailView):
     model = Snippet

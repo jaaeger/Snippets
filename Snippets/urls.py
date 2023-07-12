@@ -19,4 +19,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(template_name='pages/index.html'), name='logout'),
     path('snippets/my_list/', views.my_snippets_page, name='my_snippets_page'),
+    path('snippets/my_list_hidden/', views.my_snippets_page_hidden, name='my_snippets_page_hidden'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

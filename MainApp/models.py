@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.http import request
 
 
 class Snippet(models.Model):
@@ -8,6 +10,7 @@ class Snippet(models.Model):
     code = models.TextField(max_length=5000)
     creation_date = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, unique=False, blank=False, null=True)
 
     def __str__(self):
         return self.name
