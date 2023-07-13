@@ -1,0 +1,51 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index_page' %}">
+                <img src="{% static 'images/logo.png' %}" width="32" height="32" alt="">
+                PythonBin
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="form-inline">
+                        <a class="btn btn-outline-secondary" href="{% url 'add_snippet_page' %}">
+                            Добавить сниппет
+                        </a>
+                    </li>
+                    <li class="form-inline">
+                        <a class="btn btn-outline-info" href="{% url 'snippets_page' %}">
+                            Посмотреть сниппеты
+                        </a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="form-inline">
+                        <a class="btn btn-outline-secondary" href="{% url 'my_snippets_page' %}">
+                            Мои сниппеты
+                        </a>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+        {% if request.user.is_authenticated %}
+        <li class="form-inline">
+            <a class="btn btn-outline-secondary">
+                Привет {{ request.user.first_name|default:request.user.username }}
+            </a>
+            <a class="btn btn-outline-info" href="{% url "logout" %}">Выйти</a>
+        </li>
+        {% else %}
+        <li class="form-inline">
+            <a class="btn btn-outline-secondary" href="{% url "login" %}">Войти</a>
+        </li>
+        <li class="form-inline">
+            <a class="btn btn-outline-info" href="{% url "register" %}">Регистрация</a>
+        </li>
+        {% endif %}
+    </nav>
+</header>

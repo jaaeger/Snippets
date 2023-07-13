@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Begin page content -->
+<main role="main" class="mt-3 flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{ pagename }}</h1>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    {% if snip %}
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Дата создания</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in snip %}
+                        <tr>
+                            <td scope="row">{{ i.id }}</td>
+                            <td><a href="{% url 'snippet_detail' i.id %}">{{ i.name }}</a></td>
+                            <td>{{ i.creation_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td scope="row">Нет записей</td>
+                        </tr>
+                    {% endif %}
+
+                    </tbody>
+                </table>
+                <a href="{% url 'my_snippets_page_private' %}" class="btn btn-danger">Показать без скрытых</a>
+                <a href="{% url 'my_snippets_page_hidden' %}" class="btn btn-danger">Показать без приватных</a>
+                <div align="right">
+                    <i style="color: gray;">Всего сниппетов: {{ snip.count }}</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
